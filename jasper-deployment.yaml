@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jasper
+  namespace: awsdc-kns-flt-dev-snet
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jasper
+  template:
+    metadata:
+      labels:
+        app: jasper
+    spec:
+      containers:
+        - name: jasper-testest
+          image: 678121868393.dkr.ecr.ap-northeast-2.amazonaws.com/awsdc-ecr-flt-dev-snet:jasper-server
+          env:
+            - name: DB_HOST
+              value: "172.21.119.67"
+            - name: DB_USER
+              value: "postgres"
+            - name: DB_PORT
+              value: "5432"
+            - name: DB_PASSWORD
+              value: "postgres"
+          resources:
+            limits:
+              memory: "4Gi"
+              cpu: "4000m"
+            requests:
+              memory: "4Gi"
+              cpu: "2000m"
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: jasper-license
+              mountPath: /usr/local/share/jasperserver-pro
+      volumes:
+        - name: jasper-license
+          persistentVolumeClaim:
+            claimName: awsdc-efs-flt-dev-snet-pvc-jasper
+            readOnly: false
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jasper-service
+  namespace: awsdc-kns-flt-dev-snet
+spec:
+  type: ClusterIP
+  selector:
+    app: jasper
+  ports:
+    - port: 8080
+      targetPort: 8080
