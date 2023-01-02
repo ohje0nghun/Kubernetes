@@ -1,0 +1,231 @@
+kind: DaemonSet
+apiVersion: apps/v1
+metadata:
+  name: nvidia-kubeaddons-nvidia-driver
+  namespace: kube-system
+  uid: 86007e0c-51b0-4a6a-933e-f2dd7af36417
+  resourceVersion: '1738207'
+  generation: 10
+  creationTimestamp: '2022-12-08T09:27:46Z'
+  annotations:
+    deprecated.daemonset.template.generation: '10'
+    kubectl.kubernetes.io/last-applied-configuration: >
+      {"apiVersion":"apps/v1","kind":"DaemonSet","metadata":{"annotations":{},"name":"nvidia-kubeaddons-nvidia-driver","namespace":"kube-system"},"spec":{"selector":{"matchLabels":{"name":"nvidia-kubeaddons-nvidia-driver"}},"template":{"metadata":{"labels":{"name":"nvidia-kubeaddons-nvidia-driver"}},"spec":{"containers":[{"command":["/usr/local/bin/wrapper.sh"],"image":"www.kb-sys.co.kr/nvcr.io/nvidia/driver:450.80.02-centos7","name":"nvidia-driver","resources":{"requests":{"cpu":"500m","memory":"512Mi"}},"securityContext":{"privileged":true},"volumeMounts":[{"mountPath":"/run/kernel/postinst.d","name":"update-driver"},{"mountPath":"/var/www/repos/rhel","name":"yum-repo"},{"mountPath":"/run/nvidia","mountPropagation":"Bidirectional","name":"driver-path"},{"mountPath":"/etc/yum.repos.d/CentOS-Vault.repo","name":"vault-repo","subPath":"CentOS-Vault.repo"},{"mountPath":"/usr/local/bin/wrapper.sh","name":"wrapper-sh","subPath":"wrapper.sh"},{"mountPath":"/etc/yum.repos.d","name":"yum-repo2"}]}],"nodeSelector":{"konvoy.mesosphere.com/gpu-provider":"NVIDIA"},"volumes":[{"hostPath":{"path":"/etc/kernel/postinst.d","type":""},"name":"update-driver"},{"hostPath":{"path":"/var/www/repos/rhel","type":""},"name":"yum-repo"},{"hostPath":{"path":"/etc/yum.repos.d","type":""},"name":"yum-repo2"},{"hostPath":{"path":"/run/nvidia","type":""},"name":"driver-path"},{"configMap":{"defaultMode":420,"name":"nvidia-kubeaddons-nvidia-driver-centos7-vault-repo"},"name":"vault-repo"},{"configMap":{"defaultMode":493,"name":"nvidia-kubeaddons-nvidia-driver-wrapper-sh"},"name":"wrapper-sh"}]}}}}
+  managedFields:
+    - manager: kubectl-client-side-apply
+      operation: Update
+      apiVersion: apps/v1
+      time: '2022-12-08T09:27:46Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:deprecated.daemonset.template.generation: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+        f:spec:
+          f:revisionHistoryLimit: {}
+          f:selector: {}
+          f:template:
+            f:metadata:
+              f:labels:
+                .: {}
+                f:name: {}
+            f:spec:
+              f:containers:
+                k:{"name":"nvidia-driver"}:
+                  .: {}
+                  f:command: {}
+                  f:imagePullPolicy: {}
+                  f:name: {}
+                  f:resources:
+                    .: {}
+                    f:requests:
+                      .: {}
+                      f:cpu: {}
+                      f:memory: {}
+                  f:securityContext:
+                    .: {}
+                    f:privileged: {}
+                  f:terminationMessagePath: {}
+                  f:terminationMessagePolicy: {}
+                  f:volumeMounts:
+                    .: {}
+                    k:{"mountPath":"/run/nvidia"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:mountPropagation: {}
+                      f:name: {}
+              f:dnsPolicy: {}
+              f:nodeSelector:
+                .: {}
+                f:konvoy.mesosphere.com/gpu-provider: {}
+              f:restartPolicy: {}
+              f:schedulerName: {}
+              f:securityContext: {}
+              f:terminationGracePeriodSeconds: {}
+              f:volumes:
+                .: {}
+                k:{"name":"driver-path"}:
+                  .: {}
+                  f:hostPath:
+                    .: {}
+                    f:path: {}
+                    f:type: {}
+                  f:name: {}
+          f:updateStrategy:
+            f:rollingUpdate:
+              .: {}
+              f:maxUnavailable: {}
+            f:type: {}
+    - manager: dashboard
+      operation: Update
+      apiVersion: apps/v1
+      time: '2022-12-09T14:58:37Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:spec:
+          f:template:
+            f:spec:
+              f:containers:
+                k:{"name":"nvidia-driver"}:
+                  f:image: {}
+                  f:volumeMounts:
+                    k:{"mountPath":"/etc/yum.repos.d"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/run/kernel/postinst.d"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/usr/local/bin/wrapper.sh"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                      f:subPath: {}
+                    k:{"mountPath":"/var/www/repos/rhel"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+              f:volumes:
+                k:{"name":"update-driver"}:
+                  .: {}
+                  f:hostPath:
+                    .: {}
+                    f:path: {}
+                    f:type: {}
+                  f:name: {}
+                k:{"name":"wrapper-sh"}:
+                  .: {}
+                  f:configMap:
+                    .: {}
+                    f:defaultMode: {}
+                    f:name: {}
+                  f:name: {}
+                k:{"name":"yum-repo"}:
+                  .: {}
+                  f:hostPath:
+                    .: {}
+                    f:path: {}
+                    f:type: {}
+                  f:name: {}
+                k:{"name":"yum-repo2"}:
+                  .: {}
+                  f:hostPath:
+                    .: {}
+                    f:path: {}
+                    f:type: {}
+                  f:name: {}
+    - manager: kube-controller-manager
+      operation: Update
+      apiVersion: apps/v1
+      time: '2022-12-13T02:05:07Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:currentNumberScheduled: {}
+          f:desiredNumberScheduled: {}
+          f:numberAvailable: {}
+          f:numberMisscheduled: {}
+          f:numberReady: {}
+          f:observedGeneration: {}
+          f:updatedNumberScheduled: {}
+spec:
+  selector:
+    matchLabels:
+      name: nvidia-kubeaddons-nvidia-driver
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        name: nvidia-kubeaddons-nvidia-driver
+    spec:
+      volumes:
+        - name: update-driver
+          hostPath:
+            path: /etc/kernel/postinst.d
+            type: ''
+        - name: yum-repo
+          hostPath:
+            path: /var/www/repos/rhel
+            type: ''
+        - name: yum-repo2
+          hostPath:
+            path: /etc/yum.repos.d
+            type: ''
+        - name: driver-path
+          hostPath:
+            path: /run/nvidia
+            type: ''
+        - name: wrapper-sh
+          configMap:
+            name: nvidia-kubeaddons-nvidia-driver-wrapper-sh
+            defaultMode: 493
+      containers:
+        - name: nvidia-driver
+          image: www.kb-sys.co.kr/nvcr.io/nvidia/driver:450.80.02-centos7
+          command:
+            - /usr/local/bin/wrapper.sh
+          resources:
+            requests:
+              cpu: 500m
+              memory: 512Mi
+          volumeMounts:
+            - name: update-driver
+              mountPath: /run/kernel/postinst.d
+            - name: yum-repo
+              mountPath: /var/www/repos/rhel
+            - name: driver-path
+              mountPath: /run/nvidia
+              mountPropagation: Bidirectional
+            - name: wrapper-sh
+              mountPath: /usr/local/bin/wrapper.sh
+              subPath: wrapper.sh
+            - name: yum-repo2
+              mountPath: /etc/yum.repos.d
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            privileged: true
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      nodeSelector:
+        konvoy.mesosphere.com/gpu-provider: NVIDIA
+      securityContext: {}
+      schedulerName: default-scheduler
+  updateStrategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+  revisionHistoryLimit: 10
+status:
+  currentNumberScheduled: 1
+  numberMisscheduled: 0
+  desiredNumberScheduled: 1
+  numberReady: 1
+  observedGeneration: 10
+  updatedNumberScheduled: 1
+  numberAvailable: 1
