@@ -1,0 +1,222 @@
+kind: DaemonSet
+apiVersion: apps/v1
+metadata:
+  name: nvidia-kubeaddons-nvidia-dcgm-exporter
+  namespace: kubeaddons
+  uid: eec97193-56f0-4639-9323-8421ab183e11
+  resourceVersion: '1737914'
+  generation: 1
+  creationTimestamp: '2022-12-12T03:11:33Z'
+  annotations:
+    deprecated.daemonset.template.generation: '1'
+    kubectl.kubernetes.io/last-applied-configuration: >
+      {"apiVersion":"apps/v1","kind":"DaemonSet","metadata":{"annotations":{},"name":"nvidia-kubeaddons-nvidia-dcgm-exporter","namespace":"kubeaddons"},"spec":{"selector":{"matchLabels":{"name":"nvidia-kubeaddons-nvidia-dcgm-exporter"}},"template":{"metadata":{"labels":{"name":"nvidia-kubeaddons-nvidia-dcgm-exporter"}},"spec":{"containers":[{"image":"nvidia/pod-gpu-metrics-exporter:v1.0.0-alpha","imagePullPolicy":"IfNotPresent","name":"pod-nvidia-gpu-metrics-exporter","ports":[{"containerPort":9400,"hostPort":9400,"name":"gpu-metrics","protocol":"TCP"}],"securityContext":{"runAsNonRoot":false,"runAsUser":0},"terminationMessagePath":"/dev/termination-log","terminationMessagePolicy":"File","volumeMounts":[{"mountPath":"/var/lib/kubelet/pod-resources","name":"pod-gpu-resources","readOnly":true},{"mountPath":"/run/prometheus","name":"device-metrics","readOnly":true}]},{"image":"nvidia/dcgm-exporter:1.4.6","imagePullPolicy":"IfNotPresent","name":"nvidia-dcgm-exporter","resources":{},"securityContext":{"runAsNonRoot":false,"runAsUser":0},"terminationMessagePath":"/dev/termination-log","terminationMessagePolicy":"File","volumeMounts":[{"mountPath":"/run/prometheus","name":"device-metrics"}]}],"dnsPolicy":"ClusterFirst","initContainers":[{"command":["sh","-c","sleep
+      200"],"image":"busybox","imagePullPolicy":"Always","name":"init-wait","resources":{},"terminationMessagePath":"/dev/termination-log","terminationMessagePolicy":"File"}],"nodeSelector":{"konvoy.mesosphere.com/gpu-provider":"NVIDIA"},"restartPolicy":"Always","schedulerName":"default-scheduler","terminationGracePeriodSeconds":30,"volumes":[{"hostPath":{"path":"/var/lib/kubelet/pod-resources","type":""},"name":"pod-gpu-resources"},{"emptyDir":{"medium":"Memory"},"name":"device-metrics"}]}}}}
+  managedFields:
+    - manager: kubectl-client-side-apply
+      operation: Update
+      apiVersion: apps/v1
+      time: '2022-12-12T03:11:33Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:deprecated.daemonset.template.generation: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+        f:spec:
+          f:revisionHistoryLimit: {}
+          f:selector: {}
+          f:template:
+            f:metadata:
+              f:labels:
+                .: {}
+                f:name: {}
+            f:spec:
+              f:containers:
+                k:{"name":"nvidia-dcgm-exporter"}:
+                  .: {}
+                  f:image: {}
+                  f:imagePullPolicy: {}
+                  f:name: {}
+                  f:resources: {}
+                  f:securityContext:
+                    .: {}
+                    f:runAsNonRoot: {}
+                    f:runAsUser: {}
+                  f:terminationMessagePath: {}
+                  f:terminationMessagePolicy: {}
+                  f:volumeMounts:
+                    .: {}
+                    k:{"mountPath":"/run/prometheus"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                k:{"name":"pod-nvidia-gpu-metrics-exporter"}:
+                  .: {}
+                  f:image: {}
+                  f:imagePullPolicy: {}
+                  f:name: {}
+                  f:ports:
+                    .: {}
+                    k:{"containerPort":9400,"protocol":"TCP"}:
+                      .: {}
+                      f:containerPort: {}
+                      f:hostPort: {}
+                      f:name: {}
+                      f:protocol: {}
+                  f:resources: {}
+                  f:securityContext:
+                    .: {}
+                    f:runAsNonRoot: {}
+                    f:runAsUser: {}
+                  f:terminationMessagePath: {}
+                  f:terminationMessagePolicy: {}
+                  f:volumeMounts:
+                    .: {}
+                    k:{"mountPath":"/run/prometheus"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                      f:readOnly: {}
+                    k:{"mountPath":"/var/lib/kubelet/pod-resources"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                      f:readOnly: {}
+              f:dnsPolicy: {}
+              f:initContainers:
+                .: {}
+                k:{"name":"init-wait"}:
+                  .: {}
+                  f:command: {}
+                  f:image: {}
+                  f:imagePullPolicy: {}
+                  f:name: {}
+                  f:resources: {}
+                  f:terminationMessagePath: {}
+                  f:terminationMessagePolicy: {}
+              f:nodeSelector:
+                .: {}
+                f:konvoy.mesosphere.com/gpu-provider: {}
+              f:restartPolicy: {}
+              f:schedulerName: {}
+              f:securityContext: {}
+              f:terminationGracePeriodSeconds: {}
+              f:volumes:
+                .: {}
+                k:{"name":"device-metrics"}:
+                  .: {}
+                  f:emptyDir:
+                    .: {}
+                    f:medium: {}
+                  f:name: {}
+                k:{"name":"pod-gpu-resources"}:
+                  .: {}
+                  f:hostPath:
+                    .: {}
+                    f:path: {}
+                    f:type: {}
+                  f:name: {}
+          f:updateStrategy:
+            f:rollingUpdate:
+              .: {}
+              f:maxUnavailable: {}
+            f:type: {}
+    - manager: kube-controller-manager
+      operation: Update
+      apiVersion: apps/v1
+      time: '2022-12-13T02:04:06Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:currentNumberScheduled: {}
+          f:desiredNumberScheduled: {}
+          f:numberMisscheduled: {}
+          f:numberReady: {}
+          f:numberUnavailable: {}
+          f:observedGeneration: {}
+          f:updatedNumberScheduled: {}
+spec:
+  selector:
+    matchLabels:
+      name: nvidia-kubeaddons-nvidia-dcgm-exporter
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        name: nvidia-kubeaddons-nvidia-dcgm-exporter
+    spec:
+      volumes:
+        - name: pod-gpu-resources
+          hostPath:
+            path: /var/lib/kubelet/pod-resources
+            type: ''
+        - name: device-metrics
+          emptyDir:
+            medium: Memory
+      initContainers:
+        - name: init-wait
+          image: busybox
+          command:
+            - sh
+            - '-c'
+            - sleep 200
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: Always
+      containers:
+        - name: pod-nvidia-gpu-metrics-exporter
+          image: nvidia/pod-gpu-metrics-exporter:v1.0.0-alpha
+          ports:
+            - name: gpu-metrics
+              hostPort: 9400
+              containerPort: 9400
+              protocol: TCP
+          resources: {}
+          volumeMounts:
+            - name: pod-gpu-resources
+              readOnly: true
+              mountPath: /var/lib/kubelet/pod-resources
+            - name: device-metrics
+              readOnly: true
+              mountPath: /run/prometheus
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            runAsUser: 0
+            runAsNonRoot: false
+        - name: nvidia-dcgm-exporter
+          image: nvidia/dcgm-exporter:1.4.6
+          resources: {}
+          volumeMounts:
+            - name: device-metrics
+              mountPath: /run/prometheus
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            runAsUser: 0
+            runAsNonRoot: false
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      nodeSelector:
+        konvoy.mesosphere.com/gpu-provider: NVIDIA
+      securityContext: {}
+      schedulerName: default-scheduler
+  updateStrategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+  revisionHistoryLimit: 10
+status:
+  currentNumberScheduled: 1
+  numberMisscheduled: 0
+  desiredNumberScheduled: 1
+  numberReady: 0
+  observedGeneration: 1
+  updatedNumberScheduled: 1
+  numberUnavailable: 1
